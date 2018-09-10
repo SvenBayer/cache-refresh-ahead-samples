@@ -26,13 +26,14 @@ public class Cache2kConfig extends CachingConfigurerSupport {
                 return reloadAheadMethod(o);
             }
         };
-        return new SpringCache2kCacheManager()
-                .addCaches(builder -> Cache2kBuilder.of(ReloadAheadKey.class, Object.class)
-                        .name("longrun")
+        SpringCache2kCacheManager cacheManager = new SpringCache2kCacheManager()
+                .defaultSetup(builder -> Cache2kBuilder.of(ReloadAheadKey.class, Object.class)
                         .expireAfterWrite(10L, TimeUnit.SECONDS)
                         .resilienceDuration(5L, TimeUnit.SECONDS)
                         .refreshAhead(true)
                         .loader(loader));
+        cacheManager.setAllowUnknownCache(true);
+        return cacheManager;
     }
 
     // TODO Reactive Cache-Manager

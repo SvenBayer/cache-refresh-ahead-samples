@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -36,15 +36,12 @@ public class SampleCache2kControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private SampleCache2kController sampleCache2kController;
-
-    @Autowired
     private CacheManager reloadAheadCache2kManager;
 
     @Test
     public void longrun() throws Exception {
         Instant testStart = Instant.now();
-        int max = 100;
+        int max = 10;
         for (int i = 0; i < max; i++) {
             logger.info("Iteration '{}'", i);
             Instant start = Instant.now();

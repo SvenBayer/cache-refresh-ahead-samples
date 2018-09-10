@@ -35,9 +35,6 @@ public class SampleCaffeineControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private SampleCaffeineController sampleCaffeineController;
-
-    @Autowired
     private CacheManager reloadAheadCaffeineCacheManager;
 
     @Test
