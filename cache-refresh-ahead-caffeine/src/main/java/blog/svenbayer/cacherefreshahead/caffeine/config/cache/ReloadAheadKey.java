@@ -10,21 +10,21 @@ public class ReloadAheadKey {
     private Method method;
     private Object[] parameters;
 
-    public ReloadAheadKey(Object instance, Method method, Object[] parameters) {
+    ReloadAheadKey(Object instance, Method method, Object[] parameters) {
         this.instance = instance;
         this.method = method;
         this.parameters = parameters;
     }
 
-    public Object getInstance() {
+    Object getInstance() {
         return instance;
     }
 
-    public Method getMethod() {
+    Method getMethod() {
         return method;
     }
 
-    public Object[] getParameters() {
+    Object[] getParameters() {
         return parameters;
     }
 

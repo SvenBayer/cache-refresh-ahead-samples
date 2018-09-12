@@ -28,6 +28,4 @@ public class SampleCaffeineController {
         String result = sampleCaffeineService.longRunningSimulation(value);
         return ResponseEntity.ok(result);
     }
-
-    // TODO Reactive Endpoint
 }

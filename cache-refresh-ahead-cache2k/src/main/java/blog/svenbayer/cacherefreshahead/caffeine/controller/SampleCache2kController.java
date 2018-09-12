@@ -28,6 +28,4 @@ public class SampleCache2kController {
         String result = sampleCache2kService.longRunningSimulation(value);
         return ResponseEntity.ok(result);
     }
-
-    // TODO Reactive Endpoint
 }

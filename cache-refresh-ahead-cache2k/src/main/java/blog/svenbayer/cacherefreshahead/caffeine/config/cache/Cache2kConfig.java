@@ -38,8 +38,6 @@ public class Cache2kConfig extends CachingConfigurerSupport {
         return cacheManager;
     }
 
-    // TODO Reactive Cache-Manager
-
     private Object reloadAheadMethod(ReloadAheadKey key) {
         try {
             logger.info("Starting re-population for parameters '{}'", key.getParameters());
