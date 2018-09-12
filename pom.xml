@@ -16,6 +16,10 @@
     <description>Demo project for Spring Boot Cache</description>
     <url>https://github.com/SvenBayer/cache-refresh-ahead</url>
 
+    <properties>
+        <sonar.language>java</sonar.language>
+    </properties>
+
     <inceptionYear>2018</inceptionYear>
 
     <licenses>
