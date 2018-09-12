@@ -40,27 +40,27 @@ public class SampleCaffeineControllerTest {
     @Test
     public void longrun() throws Exception {
         Instant testStart = Instant.now();
-        int max = 100;
+        int max = 50;
         for (int i = 0; i < max; i++) {
             logger.info("Iteration '{}'", i);
             Instant start = Instant.now();
             long testTimePassed = Duration.between(testStart, start).getSeconds();
 
-            if (testTimePassed < 10) {
+            if (testTimePassed < 8) {
                 logger.info("Calling long running endpoints for 'World'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/World"))
                         .andExpect(status().isOk())
                         .andExpect(content().string("Hello World"));
             }
 
-            if (testTimePassed < 30) {
+            if (testTimePassed < 16) {
                 logger.info("Calling long running endpoints for 'SpringBoot'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/SpringBoot"))
                         .andExpect(status().isOk())
                         .andExpect(content().string("Hello SpringBoot"));
             }
 
-            if (testTimePassed < 50) {
+            if (testTimePassed < 24) {
                 logger.info("Calling long running endpoints for 'Java'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/Java"))
                         .andExpect(status().isOk())
@@ -72,10 +72,10 @@ public class SampleCaffeineControllerTest {
                 long durationSeconds = Duration.between(start, finish).getSeconds();
                 assertTrue("Passed seconds was: " + durationSeconds, durationSeconds <= 1);
             }
-            if (testTimePassed >= 50) {
+            if (testTimePassed >= 24) {
                 break;
             }
-            TimeUnit.MILLISECONDS.sleep(500L);
+            TimeUnit.SECONDS.sleep(1L);
         }
         CaffeineCache longrunCache = (CaffeineCache) reloadAheadCaffeineCacheManager.getCache("longrun");
         CacheStats stats = Objects.requireNonNull(longrunCache).getNativeCache().stats();

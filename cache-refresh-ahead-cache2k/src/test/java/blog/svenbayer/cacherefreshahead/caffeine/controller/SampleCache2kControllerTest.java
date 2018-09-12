@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -41,27 +40,27 @@ public class SampleCache2kControllerTest {
     @Test
     public void longrun() throws Exception {
         Instant testStart = Instant.now();
-        int max = 10;
+        int max = 50;
         for (int i = 0; i < max; i++) {
             logger.info("Iteration '{}'", i);
             Instant start = Instant.now();
             long testTimePassed = Duration.between(testStart, start).getSeconds();
 
-            if (testTimePassed < 10) {
+            if (testTimePassed < 8) {
                 logger.info("Calling long running endpoints for 'World'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/World"))
                         .andExpect(status().isOk())
                         .andExpect(content().string("Hello World"));
             }
 
-            if (testTimePassed < 30) {
+            if (testTimePassed < 16) {
                 logger.info("Calling long running endpoints for 'SpringBoot'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/SpringBoot"))
                         .andExpect(status().isOk())
                         .andExpect(content().string("Hello SpringBoot"));
             }
 
-            if (testTimePassed < 50) {
+            if (testTimePassed < 24) {
                 logger.info("Calling long running endpoints for 'Java'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/Java"))
                         .andExpect(status().isOk())
@@ -73,10 +72,10 @@ public class SampleCache2kControllerTest {
                 long durationSeconds = Duration.between(start, finish).getSeconds();
                 assertTrue("Passed seconds was: " + durationSeconds, durationSeconds <= 1);
             }
-            if (testTimePassed >= 50) {
+            if (testTimePassed >= 24) {
                 i = max;
             }
-            TimeUnit.MILLISECONDS.sleep(500L);
+            TimeUnit.SECONDS.sleep(1L);
         }
         HeapCache longrunCache = (HeapCache) reloadAheadCache2kManager.getCache("longrun").getNativeCache();
         InternalCacheInfo info = Objects.requireNonNull(longrunCache.getInfo());

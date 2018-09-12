@@ -10,7 +10,7 @@ public class SampleCache2kService {
 
     @Cacheable(value = "longrun", cacheManager = "reloadAheadCache2kManager", keyGenerator = "reloadAheadKeyGenerator")
     public String longRunningSimulation(String value) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(3L);
+        TimeUnit.SECONDS.sleep(2L);
         return "Hello " + value;
     }
 }

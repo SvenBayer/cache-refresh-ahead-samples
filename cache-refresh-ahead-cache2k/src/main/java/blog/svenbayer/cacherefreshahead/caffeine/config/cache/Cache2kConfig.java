@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
+@EnableCaching
 @Configuration
 public class Cache2kConfig extends CachingConfigurerSupport {
 
@@ -28,8 +30,8 @@ public class Cache2kConfig extends CachingConfigurerSupport {
         };
         SpringCache2kCacheManager cacheManager = new SpringCache2kCacheManager()
                 .defaultSetup(builder -> Cache2kBuilder.of(ReloadAheadKey.class, Object.class)
-                        .expireAfterWrite(10L, TimeUnit.SECONDS)
-                        .resilienceDuration(5L, TimeUnit.SECONDS)
+                        .expireAfterWrite(8L, TimeUnit.SECONDS)
+                        .resilienceDuration(4L, TimeUnit.SECONDS)
                         .refreshAhead(true)
                         .loader(loader));
         cacheManager.setAllowUnknownCache(true);
