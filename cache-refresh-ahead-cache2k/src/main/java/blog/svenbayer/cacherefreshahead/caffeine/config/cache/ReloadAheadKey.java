@@ -44,4 +44,13 @@ public class ReloadAheadKey {
         result = 31 * result + Arrays.hashCode(parameters);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ReloadAheadKey{" +
+                "instance=" + instance +
+                ", method=" + method +
+                ", parameters=" + Arrays.toString(parameters) +
+                '}';
+    }
 }

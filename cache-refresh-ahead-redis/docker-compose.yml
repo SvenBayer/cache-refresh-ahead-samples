@@ -1,0 +1,9 @@
+redis:
+  container_name: redis
+  image: redis:alpine
+  command: redis-server --requirepass redis_password
+  ports:
+  - "6379:6379"
+  volumes:
+  - ../data/redis:/data
+  restart: always

@@ -1,8 +1,5 @@
-package blog.svenbayer.cacherefreshahead.caffeine.controller;
+package blog.svenbayer.cacherefreshahead.redis.controller;
 
-import blog.svenbayer.cacherefreshahead.caffeine.CaffeineCacheRefreshAheadApplication;
-import blog.svenbayer.cacherefreshahead.caffeine.services.SampleCaffeineService;
-import com.github.benmanes.caffeine.cache.stats.CacheStats;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -18,10 +15,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,15 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-public class SampleCaffeineControllerTest {
+public class SampleRedisControllerTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(SampleCaffeineControllerTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(SampleRedisControllerTest.class);
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private SampleCaffeineService sampleCaffeineService;
 
     @Autowired
     private CacheManager reloadAheadCaffeineCacheManager;
@@ -82,11 +74,11 @@ public class SampleCaffeineControllerTest {
             }
             TimeUnit.SECONDS.sleep(1L);
         }
-        CaffeineCache longrunCache = (CaffeineCache) reloadAheadCaffeineCacheManager.getCache("longrun");
-        CacheStats stats = Objects.requireNonNull(longrunCache).getNativeCache().stats();
+        //CaffeineCache longrunCache = (CaffeineCache) reloadAheadCaffeineCacheManager.getCache("longrun");
+        /*CacheStats stats = Objects.requireNonNull(longrunCache).getNativeCache().stats();
         logger.info(stats.toString());
 
         // We make three calls with different parameters. These calls will be only missed once.
-        assertEquals(3, stats.missCount());
+        assertEquals(3, stats.missCount());*/
     }
 }

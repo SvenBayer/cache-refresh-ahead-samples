@@ -1,8 +1,6 @@
-package blog.svenbayer.cacherefreshahead.caffeine.config.cache;
+package blog.svenbayer.cacherefreshahead.redis.config.cache;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -13,27 +11,46 @@ public class ReloadAheadKey {
     private Object[] parameters;
     private String[] parameterClazzNames;
 
-    ReloadAheadKey(String instanceName, String methodName, Object[] parameters, String[] parameterClazzNames) {
+    public ReloadAheadKey() {
+    }
+
+    public ReloadAheadKey(String instanceName, String methodName, Object[] parameters, String[] parameterClazzNames) {
         this.instanceName = instanceName;
         this.methodName = methodName;
         this.parameters = parameters;
         this.parameterClazzNames = parameterClazzNames;
     }
 
-    String getInstanceName() {
+    public String getInstanceName() {
         return instanceName;
     }
 
-    String getMethodName() {
+    public String getMethodName() {
         return methodName;
     }
 
-    Object[] getParameters() {
+    public Object[] getParameters() {
         return parameters;
     }
 
-    String[] getParameterClazzNames() {
+    public String[] getParameterClazzNames() {
         return parameterClazzNames;
+    }
+
+    public void setInstanceName(String instanceName) {
+        this.instanceName = instanceName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public void setParameters(Object[] parameters) {
+        this.parameters = parameters;
+    }
+
+    public void setParameterClazzNames(String[] parameterClazzNames) {
+        this.parameterClazzNames = parameterClazzNames;
     }
 
     @Override
@@ -53,15 +70,5 @@ public class ReloadAheadKey {
         result = 31 * result + Arrays.hashCode(parameters);
         result = 31 * result + Arrays.hashCode(parameterClazzNames);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new IllegalStateException(e);
-        }
     }
 }

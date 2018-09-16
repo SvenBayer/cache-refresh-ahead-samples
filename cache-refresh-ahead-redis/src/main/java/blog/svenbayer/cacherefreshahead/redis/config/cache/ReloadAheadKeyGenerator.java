@@ -1,4 +1,4 @@
-package blog.svenbayer.cacherefreshahead.caffeine.config.cache;
+package blog.svenbayer.cacherefreshahead.redis.config.cache;
 
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.stereotype.Component;
