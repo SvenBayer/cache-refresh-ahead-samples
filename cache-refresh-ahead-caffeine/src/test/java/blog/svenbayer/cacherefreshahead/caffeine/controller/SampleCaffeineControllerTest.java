@@ -40,7 +40,7 @@ public class SampleCaffeineControllerTest {
     private SampleCaffeineService sampleCaffeineService;
 
     @Autowired
-    private CacheManager reloadAheadCaffeineCacheManager;
+    private CacheManager cacheManager;
 
     @Test
     public void longrun() throws Exception {
@@ -82,7 +82,7 @@ public class SampleCaffeineControllerTest {
             }
             TimeUnit.SECONDS.sleep(1L);
         }
-        CaffeineCache longrunCache = (CaffeineCache) reloadAheadCaffeineCacheManager.getCache("longrun");
+        CaffeineCache longrunCache = (CaffeineCache) cacheManager.getCache("longrun");
         CacheStats stats = Objects.requireNonNull(longrunCache).getNativeCache().stats();
         logger.info(stats.toString());
 

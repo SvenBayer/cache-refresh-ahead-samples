@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SampleCaffeineService {
 
-    @Cacheable(value = "longrun", cacheManager = "reloadAheadCaffeineCacheManager", keyGenerator = "reloadAheadKeyGenerator")
+    @Cacheable(value = "longrun", cacheManager = "cacheManager", keyGenerator = "reloadAheadKeyGenerator")
     public String longRunningSimulation(String value) throws InterruptedException {
         TimeUnit.SECONDS.sleep(2L);
         return "Hello " + value;

@@ -10,4 +10,3 @@ public class CaffeineCacheRefreshAheadApplication {
 		SpringApplication.run(CaffeineCacheRefreshAheadApplication.class, args);
 	}
 }
-

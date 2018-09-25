@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "blog.svenbayer.cacherefreshahead.redis", "org.springframework.data.redis.cache" })
 public class RedisCacheRefreshAheadApplication {
 
 	public static void main(String[] args) {

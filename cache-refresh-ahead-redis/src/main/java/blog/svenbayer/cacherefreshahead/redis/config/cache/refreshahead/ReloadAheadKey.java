@@ -1,10 +1,16 @@
-package blog.svenbayer.cacherefreshahead.redis.config.cache;
+package blog.svenbayer.cacherefreshahead.redis.config.cache.refreshahead;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Objects;
 
-public class ReloadAheadKey {
+public class ReloadAheadKey implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String instanceName;
     private String methodName;
@@ -70,5 +76,18 @@ public class ReloadAheadKey {
         result = 31 * result + Arrays.hashCode(parameters);
         result = 31 * result + Arrays.hashCode(parameterClazzNames);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);) {
+            oos.writeObject(this);
+            oos.flush();
+            byte[] objectAsBytes = baos.toByteArray();
+            return Base64.getEncoder().encodeToString(objectAsBytes);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }
