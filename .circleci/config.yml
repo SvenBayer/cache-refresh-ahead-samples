@@ -39,6 +39,12 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
+      - run:
+          name: Start container and verify it's working
+          command: |
+            set -x
+            docker-compose up -d
+
       # run tests!
       - run:
           name: "Running Tests"
