@@ -65,6 +65,24 @@
 
     <profiles>
         <profile>
+            <id>blog-svenbayer-snapshot</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>svenbayer-blogsvenbayer</id>
+                    <url>https://packagecloud.io/svenbayer/blogsvenbayer/maven2</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
             <id>spring</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -126,24 +144,6 @@
                     <url>http://repo.spring.io/plugins-release-local</url>
                     <snapshots>
                         <enabled>false</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-        <profile>
-            <id>blog-svenbayer-snapshot</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>svenbayer-blogsvenbayer</id>
-                    <url>https://packagecloud.io/svenbayer/blogsvenbayer/maven2</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
                     </snapshots>
                 </pluginRepository>
             </pluginRepositories>
