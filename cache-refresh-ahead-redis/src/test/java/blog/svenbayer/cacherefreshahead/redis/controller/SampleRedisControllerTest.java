@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -30,9 +28,6 @@ public class SampleRedisControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private CacheManager reloadAheadCaffeineCacheManager;
 
     @Test
     public void longrun() throws Exception {
@@ -57,7 +52,7 @@ public class SampleRedisControllerTest {
                         .andExpect(content().string("Hello SpringBoot"));
             }
 
-            if (testTimePassed < 24) {
+            if (testTimePassed < 17) {
                 logger.info("Calling long running endpoints for 'Java'");
                 mockMvc.perform(MockMvcRequestBuilders.get("/longrun/Java"))
                         .andExpect(status().isOk())
@@ -69,16 +64,10 @@ public class SampleRedisControllerTest {
                 long durationSeconds = Duration.between(start, finish).getSeconds();
                 assertTrue("Passed seconds was: " + durationSeconds, durationSeconds <= 1);
             }
-            if (testTimePassed >= 24) {
+            if (testTimePassed >= 17) {
                 break;
             }
             TimeUnit.SECONDS.sleep(1L);
         }
-        //CaffeineCache longrunCache = (CaffeineCache) reloadAheadCaffeineCacheManager.getCache("longrun");
-        /*CacheStats stats = Objects.requireNonNull(longrunCache).getNativeCache().stats();
-        logger.info(stats.toString());
-
-        // We make three calls with different parameters. These calls will be only missed once.
-        assertEquals(3, stats.missCount());*/
     }
 }

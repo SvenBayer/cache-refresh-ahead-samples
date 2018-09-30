@@ -19,7 +19,7 @@ public class CaffeineCacheConfig extends CachingConfigurerSupport {
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder()
                 .weigher((key, value) -> value.toString().length())
                 .maximumWeight(50L)
-                .expireAfterAccess(Duration.ofSeconds(30L))
+                .expireAfterAccess(Duration.ofSeconds(15L))
                 .recordStats();
         cacheManager.setCaffeine(caffeine);
         return cacheManager;

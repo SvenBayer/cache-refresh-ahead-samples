@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>cache-refresh-ahead-caffeine</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -20,6 +20,7 @@
         <java.version>1.8</java.version>
         <caffeine.version>2.6.2</caffeine.version>
         <cache2k.version>1.2.0.Final</cache2k.version>
+        <cache-refresh-ahead-spring-boot-starter.version>1.0.1.BUILD-SNAPSHOT</cache-refresh-ahead-spring-boot-starter.version>
     </properties>
 
     <dependencies>
@@ -42,7 +43,7 @@
         <dependency>
             <groupId>blog.svenbayer</groupId>
             <artifactId>cache-refresh-ahead-spring-boot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${cache-refresh-ahead-spring-boot-starter.version}</version>
         </dependency>
 
         <!-- Caffeine Cache -->

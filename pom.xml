@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>cache-refresh-ahead-caffeine</module>
-        <module>cache-refresh-ahead-cache2k</module>
+        <module>cache-refresh-ahead-redis</module>
     </modules>
     <packaging>pom</packaging>
 
