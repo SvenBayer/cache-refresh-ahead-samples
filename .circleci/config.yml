@@ -8,11 +8,8 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+      - image: redis:alpine
+        command: redis-server --requirepass redis_password
 
     working_directory: ~/repo
 
@@ -38,14 +35,6 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      - setup_remote_docker
-      
-      - run:
-          name: Start Redis
-          command: |
-            set -x
-            docker-compose up -d
 
       # run tests!
       - run:
